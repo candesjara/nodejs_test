@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "emp-demo-1",
+    "name": "Ana Gomez",
+    "position": "Desarrolladora",
+    "office": "Bogota",
+    "salary": 4200
+  },
+  {
+    "_id": "emp-demo-2",
+    "name": "Carlos Ruiz",
+    "position": "QA",
+    "office": "Medellin",
+    "salary": 3500
+  }
+]
