@@ -185,3 +185,23 @@ ng test
 ---
 
 ✅ Al ejecutar los tests en **backend** y **frontend**, deberías ver que todas las pruebas pasan correctamente.
+
+---
+
+## Despliegue en Render
+
+Este backend debe desplegarse como **Web Service**, no como **Static Site**.
+
+Configuración recomendada:
+
+- Root Directory: raíz del repositorio
+- Build Command: `npm install`
+- Start Command: `npm start`
+
+Puntos clave:
+
+- El `package.json` que Render debe usar está en la raíz.
+- El archivo de entrada real del backend es `backend/index.js`.
+- No existe `src/index.js`.
+- El servidor usa `process.env.PORT || 3000`.
+- En Render debes definir `MONGODB_URI` con tu cadena de conexión de MongoDB.

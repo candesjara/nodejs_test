@@ -1,50 +1,24 @@
-/**
- * Archivo principal del servidor backend.
- * 
- * Aquí se configura y arranca el servidor Express.
- * Se definen los middlewares, la conexión a la base de datos y las rutas.
- */
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
 
-// Importación de módulos necesarios
-const express = require('express');         // Framework para construir el servidor web
-const morgan = require('morgan');           // Middleware para mostrar las peticiones HTTP por consola
-const cors = require('cors');               // Middleware para permitir solicitudes desde otro origen (CORS)
-const app = express();                      // Se crea la instancia principal del servidor
-const { mongoose } = require('./database'); // Se importa la conexión a la base de datos (no todo el módulo)
+require('./database');
 
-// -----------------------------------
-// Configuraciones del servidor
-// -----------------------------------
+const app = express();
+const port = process.env.PORT || 3000;
 
-// Definición del puerto donde se ejecutará el servidor
-// Si existe una variable de entorno llamada PORT, se usará esa. Si no, por defecto será 3000.
-app.set('port', process.env.PORT || 3000);
+app.set('port', port);
 
-// -----------------------------------
-// Middlewares
-// -----------------------------------
-
-// Morgan para registrar las peticiones en consola (modo 'dev')
 app.use(morgan('dev'));
-
-// Middleware para interpretar los datos enviados en formato JSON
 app.use(express.json());
+app.use(cors());
 
-// CORS permite que el frontend (por ejemplo en Angular en el puerto 4200) acceda al backend
-app.use(cors({ origin: 'http://localhost:4200' }));
+app.get('/', (_req, res) => {
+  res.json({ ok: true, service: 'backend', port });
+});
 
-// -----------------------------------
-// Rutas del servidor
-// -----------------------------------
-
-// Se define el prefijo '/api/empleados' y se le asocian las rutas del archivo empleado.route.js
 app.use('/api/empleados', require('./routes/empleado.route'));
 
-// -----------------------------------
-// Inicio del servidor
-// -----------------------------------
-
-// Se inicia el servidor y se muestra un mensaje indicando el puerto activo
 app.listen(app.get('port'), () => {
-    console.log('Servidor activo en el puerto', app.get('port'));
+  console.log('Servidor activo en el puerto', app.get('port'));
 });
