@@ -38,7 +38,7 @@ npm install
 npm start
 ```
 
-El servidor escucha en `process.env.PORT || 3000`.
+El servidor escucha en `process.env.PORT || 3000` y bindea en `0.0.0.0`.
 
 ## Endpoints
 
@@ -58,6 +58,7 @@ Configuracion exacta:
 - Root Directory: raiz del repositorio
 - Build Command: `npm install`
 - Start Command: `npm start`
+- Health Check Path: `/`
 
 Node:
 
